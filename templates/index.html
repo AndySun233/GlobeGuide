@@ -24,11 +24,11 @@
             margin-top: 5px;
             box-sizing: border-box;
         }
-        /* 隐藏默认的文件输入控件 */
+        /* Hide the default file input */
         input[type="file"] {
             display: none;
         }
-        /* 自定义的文件上传按钮 */
+        /* Custom file upload button */
         .custom-file-upload {
             display: inline-block;
             padding: 10px 20px;
@@ -45,6 +45,10 @@
             width: 100%;
             font-size: 1.1em;
         }
+        #file-name {
+            margin-left: 10px;
+            font-style: italic;
+        }
         #result {
             margin-top: 40px;
         }
@@ -57,10 +61,12 @@
         <input type="text" id="location" name="location" placeholder="Enter the location name" required>
         
         <label>Upload Image:</label>
+        <!-- Custom file upload button -->
         <label for="image" class="custom-file-upload">
             Select Image
         </label>
         <input type="file" id="image" name="image" accept="image/*" required>
+        <!-- Display selected file name -->
         <span id="file-name"></span>
         
         <button type="submit">Submit</button>
