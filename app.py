@@ -1,11 +1,7 @@
-# app.py
-
 from flask import Flask, request, jsonify, render_template
 import os
 import uuid
 import traceback
-
-# 从 utils.ai_plug 导入生成文本的函数
 from utils.ai_plug import generate_text_from_image
 
 app = Flask(__name__)

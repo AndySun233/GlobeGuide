@@ -29,29 +29,41 @@ document.getElementById('tour-form').addEventListener('submit', function(event) 
         body: formData
     })
     .then(function(response) {
+        console.log('Received response:', response);
+        
+        // 检查响应的状态
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not ok: ' + response.status + ' ' + response.statusText);
         }
-        return response.json();
+        
+        // 尝试解析JSON
+        return response.json().catch(function(err) {
+            throw new Error('Failed to parse JSON: ' + err.message);
+        });
     })
     .then(function(data) {
+        console.log('Parsed JSON data:', data);
+    
         // 清除之前的结果
         resultDiv.innerHTML = '';
-
+    
+        // 检查是否有错误信息
         if (data.error) {
+            console.error('Server returned an error:', data.error);
             resultDiv.innerHTML = '<p>Error: ' + data.error + '</p>';
             return;
         }
-
+    
         // 显示文本描述
         var textParagraph = document.createElement('p');
         textParagraph.textContent = data.text;
         resultDiv.appendChild(textParagraph);
-
+    
         // 如果需要处理音频，可以在这里添加相关代码
     })
     .catch(function(error) {
-        console.error('Error:', error);
-        resultDiv.innerHTML = '<p>Sorry, an error occurred while generating the tour guide.</p>';
+        console.error('Error during fetch or processing:', error);
+        resultDiv.innerHTML = '<p>Sorry, an error occurred while generating the tour guide. Error: ' + error.message + '</p>';
     });
+    
 });
