@@ -27,7 +27,7 @@ def generate_text_from_image(location, image_data):
                 },
                 {
                     "type": "image",
-                    "image": image_data  # Assuming Mistral AI accepts image data directly
+                    "image": image_data 
                 }
             ]
         }

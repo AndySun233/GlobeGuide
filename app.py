@@ -11,9 +11,8 @@ from utils.ai_plug import generate_text_from_image
 app = Flask(__name__)
 CORS(app)
 
-# 设置模板和静态文件目录
 app.template_folder = 'templates'
-app.static_folder = 'templates'  # 因为您的 script.js 在 templates/ 目录下
+app.static_folder = 'templates' 
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
