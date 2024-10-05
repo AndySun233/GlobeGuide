@@ -2,27 +2,42 @@ import os
 from mistralai import Mistral
 
 api_key = "pqmKVrIjJjkKQMhvRslPapP7QzNV2A1I"
-
 model = "pixtral-12b-2409"
 
 client = Mistral(api_key=api_key)
 
-chat_response = client.chat.complete(
-    model= model,
-    messages = messages = [
+def generate_text_from_image(location, image_data):
+    """
+    Calls the Mistral AI API to generate text based on the location and image.
+
+    Args:
+        location (str): The name of the location.
+        image_data (bytes): The image data in bytes.
+
+    Returns:
+        str: The generated text description.
+    """
+    messages = [
         {
             "role": "user",
             "content": [
                 {
                     "type": "text",
-                    "text": "What's in this image?"
+                    "text": f"Tell me about {location} based on this image."
                 },
                 {
-                    "type": "image_url",
-                    "image_url": "https://tripfixers.com/wp-content/uploads/2019/11/eiffel-tower-with-snow.jpeg"
+                    "type": "image",
+                    "image": image_data  # Assuming Mistral AI accepts image data directly
                 }
             ]
         }
     ]
-)
-print(chat_response.choices[0].message.content)
+
+    # Call Mistral AI API
+    chat_response = client.chat.complete(
+        model=model,
+        messages=messages
+    )
+
+    generated_text = chat_response.choices[0].message.content
+    return generated_text
