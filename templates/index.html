@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GlobalGuide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        /* 隐藏默认的文件输入控件 */
+        input[type="file"] {
+            display: none;
+        }
+        /* 自定义的文件上传按钮 */
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            margin-top: 30px;
+            padding: 12px 20px;
+            width: 100%;
+            font-size: 1.1em;
+        }
+        #result {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>World Tour Guide Prototype</h1>
+    <form id="tour-form">
+        <label for="location">Location Name:</label>
+        <input type="text" id="location" name="location" placeholder="Enter the location name" required>
+        
+        <label>Upload Image:</label>
+        <label for="image" class="custom-file-upload">
+            Select Image
+        </label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <span id="file-name"></span>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <div id="result">
+        <!-- Results will be displayed here -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
