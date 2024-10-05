@@ -9,11 +9,20 @@ client = Mistral(api_key=api_key)
 
 chat_response = client.chat.complete(
     model= model,
-    messages = [
+    messages = messages = [
         {
             "role": "user",
-            "content": "What is the best French cheese?",
-        },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "What's in this image?"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": "https://tripfixers.com/wp-content/uploads/2019/11/eiffel-tower-with-snow.jpeg"
+                }
+            ]
+        }
     ]
 )
 print(chat_response.choices[0].message.content)
