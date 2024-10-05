@@ -1,19 +1,29 @@
 # app.py
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import os
 import uuid
 
-# Import the function from ai_plug.py
-from ai_plug import generate_text_from_image
+# Import the function from utils/ai_plug.py
+from utils.ai_plug import generate_text_from_image
 
 app = Flask(__name__)
 CORS(app)
+
+# 设置模板和静态文件目录
+app.template_folder = 'templates'
+app.static_folder = 'templates'  # 因为您的 script.js 在 templates/ 目录下
+
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 # Ensure the upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Route to render the index.html
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 # Route to process the form data
 @app.route('/process', methods=['POST'])

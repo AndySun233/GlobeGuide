@@ -23,7 +23,7 @@ def generate_text_from_image(location, image_data):
             "content": [
                 {
                     "type": "text",
-                    "text": f"Tell me about {location} based on this image."
+                    "text": f"Tell me about this image in this {location}."
                 },
                 {
                     "type": "image",

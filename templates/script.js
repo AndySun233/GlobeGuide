@@ -24,7 +24,7 @@ document.getElementById('tour-form').addEventListener('submit', function(event) 
     resultDiv.innerHTML = '<p>Generating the tour guide, please wait...</p>';
 
     // Send request to the backend
-    fetch('/process', {
+    fetch('http://localhost:5000/process', {
         method: 'POST',
         body: formData
     })
@@ -35,21 +35,20 @@ document.getElementById('tour-form').addEventListener('submit', function(event) 
         return response.json();
     })
     .then(function(data) {
-        // Display the result from the backend
+        // Clear previous result
         resultDiv.innerHTML = '';
+
+        if (data.error) {
+            resultDiv.innerHTML = '<p>Error: ' + data.error + '</p>';
+            return;
+        }
 
         // Display the textual description
         var textParagraph = document.createElement('p');
         textParagraph.textContent = data.text;
         resultDiv.appendChild(textParagraph);
 
-        // Display the audio guide
-        if (data.audio_url) {
-            var audioPlayer = document.createElement('audio');
-            audioPlayer.controls = true;
-            audioPlayer.src = data.audio_url;
-            resultDiv.appendChild(audioPlayer);
-        }
+        // Since we're not handling audio, remove any audio-related code
     })
     .catch(function(error) {
         console.error('Error:', error);
